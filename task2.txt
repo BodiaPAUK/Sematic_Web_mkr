@@ -1,0 +1,18 @@
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?cityName
+WHERE {
+  ?city a dbo:City ;
+    rdfs:label ?cityName ;
+    dbo:country dbr:Ukraine.
+
+  ?city dbp:establishedDate ?establishedDate  .
+  # пробував також dbo:foundingDate, але ті які мають його, всерівно мають dbp:establishedDate
+
+  #FILTER (LANG(?cityName)="en") .    
+}
+ORDER BY DESC(?establishedDate)
+LIMIT 1
